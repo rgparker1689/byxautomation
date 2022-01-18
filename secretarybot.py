@@ -60,6 +60,7 @@ def sentinel():
         if dist in [1, 2, 3]:
             alert(event['Event Name'], event['Event Type'], event['Event Date'].date().strftime("%m/%d/%Y"),
                   event['Event Time'], dist, event['Location'])
+            time.sleep(2)
 
 if __name__ == '__main__':
     sentinel()

@@ -1,2 +1,1 @@
-web: python secretarybot.py
-worker: python secretarybot.py
+web: secretarybot.py

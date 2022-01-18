@@ -37,7 +37,7 @@ def alert(event_name, event_type, event_date, event_time, distance, location):
     print(message)
 
     res = requests.post(url='https://api.groupme.com/v3/bots/post',
-                        data=json.dumps({'bot_id': 'cfe247bb3de3894f0f2d24c485', 'text': message}),
+                        data=json.dumps({'bot_id': 'b5915a24d4d904c8f31f7b2e7f', 'text': message}),
                         headers={'Content-Type': 'application/json'})
     print(res.text)
 

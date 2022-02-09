@@ -10,28 +10,20 @@ sheet_id = '1y970ypoavFkM1zgtWkn6qZ7YsvnCJdxFvKLOZOUU_ac'
 sheet_name = 'events'
 
 
-# TODO: uploads logo
-# data = open('./byxlogo.png', 'rb').read()
-# res = requests.post(url='https://image.groupme.com/pictures',
-#                     data=data,
-#                     headers={'Content-Type': 'image/png',
-#                              'X-Access-Token': 'rLuheSG4Swp8V0rWCOGA4uIHDQzoHabwKPrmDW9a'})
-# print(res.content)
-
 # sends http post
 def alert(event_name, event_type, event_date, event_time, distance, location):
 
-    if event_type == np.nan:
-        event_type = ''
+    if not isinstance(event_type, str):
+        event_type = 'Event'
     if distance == 3:
         message = 'Our ' + event_name + ' ' + event_type + ' is one month away on ' + event_date + '.'
     if distance == 2:
         message = 'We are one week away from the ' + event_name + ' ' + event_type + '.'
     if distance == 1:
         message = 'Our ' + event_name + ' ' + event_type + ' is TOMORROW'
-        if event_time != np.nan:
+        if isinstance(event_time, str):
             message += ' at ' + event_time
-        if location != np.nan:
+        if isinstance(location, str):
             message += ' at ' + location
         message += '.'
     print(message)

@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 
-sheet_id = '1y970ypoavFkM1zgtWkn6qZ7YsvnCJdxFvKLOZOUU_ac'
+sheet_id = '1A7cbQQuSUtz08BXMiAo-qREHu9TSAO7qhcekMJHWlAI'
 sheet_name = 'events'
 
 
@@ -34,6 +34,11 @@ def alert(event_name, event_type, event_date, event_time, distance, location):
     print(res.text)
 
 
+    res2 = requests.post(url='https://api.groupme.com/v3/bots/post',
+                        data=json.dumps({'bot_id': '13761ce67062743956db2a3d13', 'text': message}),
+                        headers={'Content-Type': 'application/json'})
+    print(res2.text)
+
 # dataframe from google sheet
 def gather_events():
     url = f'https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}'
@@ -50,6 +55,7 @@ def sentinel():
         dist = (event['Event Date'].date() - now).days
         dist = 1 if dist == 1 else 2 if dist == 7 else 3 if dist == 30 else 0
         if dist in [1, 2, 3]:
+            print(event['Event Time'], event['Location'])
             alert(event['Event Name'], event['Event Type'], event['Event Date'].date().strftime("%m/%d/%Y"),
                   event['Event Time'], dist, event['Location'])
             time.sleep(2)
